@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Conact Page</h1>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div>
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+    <div>
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email) }}
+    </div>
+    <div>
+        {{ form_errors(form.subject) }}
+        {{ form_widget(form.subject) }}
+    </div>
+    <div>
+        <img id="captcha-img" src="{{ path('captcha_route') }}" alt="Security image">
+        <img id="refresh_captcha" src="{{ asset("bundles/app/images/refresh.png") }}" alt="Refresh image">
+    </div>
+    <div>
+        {{ form_errors(form.security_code) }}
+        {{ form_widget(form.security_code) }}
+    </div>
+
+
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% include 'form.html.twig' %}
+    {% include 'code.html.twig' with {'result':result,'codes_on_street':codes_on_street} %}
+
+{% endblock %}

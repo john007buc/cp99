@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Cauta adresa dupa cod postal</h1>
+    {{ form(form) }}
+    {% if address is not null %}
+        {{ address.localitate }}
+        {{ address.judet }}
+        {{ address.tipArtera }}
+        {{ address.denumireArtera }}
+        {{ address.numar }}
+    {% endif %}
+
+{% endblock %}

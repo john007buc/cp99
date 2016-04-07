@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form(form) }}
+    {% if city is not null %}
+        {{ city.name }}, {{ city.county }}, {{ city.region }}, {{ city.longitude }}, {{ city.latitude }}
+    {% endif %}
+{% endblock %}

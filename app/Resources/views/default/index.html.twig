@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {# {% set ul0="<ul>" %}
+   {% set ul1="<li><a href=\"{{ path('info',{'county':'" %}
+   {% set ul2 = "'}) }}\">" %}
+   {% set ul3="</a></li>" %}
+   {% set ul4="</ul>" %}
+
+
+   {{ ul0|raw }}
+   {% for county in counties %}
+
+      {{ ul1|raw }}{{ county.name }} {{ ul2|raw }}{{ county.name }}{{ ul3|raw }}
+
+{% endfor %}
+   {{ ul4|raw }}
+   #}
+   <div class="reclama"></div>
+
+     {% include 'form.html.twig' %}
+     <div class="main">
+
+       {#Show cities#}
+       {% if cities is defined %}
+
+           <table class="city-table">
+               <caption>
+                   {% if county == 'Bucuresti' %}
+                      Click pt coduri postale din {{ county }}
+                   {% else %}
+                       {{ cities.getTotalItemCount }} localitati gasite in   judetul  {{ county }}
+                   {% endif %}
+               </caption>
+               <tr>
+                   {# sorting of properties based on query components #}
+                   <th>Nr</th>
+                   <th{% if cities.isSorted('o.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(cities, 'Denumire', 'o.name') }}</th>
+                   <th>{{ knp_pagination_sortable(cities, 'Siruta', 'o.siruta') }}</th>
+                   <th>{{ knp_pagination_sortable(cities, 'Lat/Long', 'o.longitude') }}</th>
+                   <th>{{ knp_pagination_sortable(cities, 'Regiunea', 'o.region') }}</th>
+               </tr>
+
+               {# table body #}
+               {% for city in cities %}
+                   <tr {% if loop.index is odd %}class="tr-color"{% endif %}>
+                       <td>{{ loop.index }}</td>
+                       <td><a href="{{ path('coduri_postale',{'county':county,'city':city}) }}">{{ city.name }}</a></td>
+                       <td><a href="{{ path('cauta_dupa_siruta',{'siruta':city.siruta}) }}"> {{ city.siruta }}</a></td>
+                       <td><a href="{{ path('latlong',{'lat':city.latitude,'long':city.longitude}) }}"><span class="block">{{ city.latitude|round(8,'floor') }}</span><span class="block">{{ city.longitude|round(8,'floor') }}</span></a></td>
+                       <td>{{ city.region }}</td>
+                   </tr>
+               {% endfor %}
+           </table>
+           {# display navigation #}
+           <div class="navigation">
+               {{ knp_pagination_render(cities) }}
+           </div>
+       {% endif %}
+
+   </div>
+   <div id="freeow" class="freeow freeow-top-right"></div>
+
+
+{% endblock %}
+
+{#
+{% block javascript %}
+{{ parent() }}
+   {% javascripts "bundles/app/js/main.js"  filter="uglifyjs2"%}
+   <script src="{{ asset_url }}" type="text/javascript"></script>
+   {% endjavascripts %}
+{% endblock %}
+#}

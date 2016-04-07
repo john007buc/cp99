@@ -1,0 +1,11 @@
+services:
+    mycaptcha:
+         class: AppBundle\MyClasses\Captcha
+         arguments: [@session]
+
+
+    admin.email:
+       class: AppBundle\Events\EventListener\EmailListener
+       arguments: [@service_container]
+       tags:
+         - {name: kernel.event_listener, event: email.send, method: sendEmail}

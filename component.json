@@ -1,0 +1,9 @@
+{
+  "name": "Coduri postale 99",
+  "version": "1.0.0",
+  "dependencies":{
+    "jquery":null,
+    "underscore-amd":null,
+    "requirejs":null
+  }
+}

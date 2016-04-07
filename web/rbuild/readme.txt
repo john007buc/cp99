@@ -1,0 +1,1 @@
+se ruleaza comanda "sudo web/rbuild/build.sh" din directorul coduripostale

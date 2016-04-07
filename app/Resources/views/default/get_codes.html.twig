@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% include 'form.html.twig' %}
+
+        {#Show results#}
+        {% if results is defined and results|length >1 %}
+            <div class="main">
+            <table class="city-table">
+                <caption>{{ results.getTotalItemCount }} inregistrari gasite</caption>
+                <tr>
+                    {# sorting of properties based on query components #}
+                    <th>Nr</th>
+                    <th{% if results.isSorted('cp.tip_artera') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(results, 'Tip artera', 'cp.tip_artera') }}</th>
+                    <th>{{ knp_pagination_sortable(results, 'Denumire artera', 'cp.denumire_artera') }}</th>
+                    <th>{{ knp_pagination_sortable(results, 'Numar', 'cp.numar') }}</th>
+                    <th>{{ knp_pagination_sortable(results, 'Cod Postal', 'cp.codpostal') }}</th>
+                </tr>
+
+                {# table body #}
+                {% for result in results %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ result.tipArtera }}</a></td>
+                        <td><a href="{{ path('cod_postal',{'slug':result.slug}) }}">{{ result.denumireArtera }}</a></td>
+                        <td>{{ result.numar }}</td>
+                        <td><a href="{{ path('cauta_dupa_cod_postal',{'cod_postal':result.codpostal}) }}">{{ result.codpostal }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(results) }}
+            </div>
+            </div>
+        {% elseif results|length ==1 %}
+
+           {% include 'code.html.twig' with {'result':results[0]} %}
+
+
+        {% endif %}
+    </div>
+{% endblock %}

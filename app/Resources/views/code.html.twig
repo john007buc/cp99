@@ -1,0 +1,23 @@
+<div class="code-tpl">
+    <p><b>Localitate: </b>{{result.localitate}}, {{result.judet}}</p>
+
+    {% if result.tipArtera !=null and result.denumireArtera !=null %}
+        <p>Cod postal: <span class="cod-postal">{{ result.codpostal }}</span>, {{ result.tipArtera}} {{ result.denumireArtera}}, {{ result.numar}}</p>
+    {% else %}
+    <p>Cod postal: <span class="cod-postal">{{ result.codpostal }}</span></p>
+    {% endif %}
+
+
+    {% if codes_on_street is defined and codes_on_street|length >1 %}
+
+    <p>Coduri postale pe strada {{ result.tipArtera}} {{ result.denumireArtera}}</p>
+
+
+
+            {% for code in codes_on_street   %}
+                <p><span class="cod-postal">{{ code.codpostal }}</span>, {{ code.tipArtera}} {{ code.denumireArtera}}, {{ code.numar}}</p>
+            {% endfor %}
+
+
+    {% endif %}
+</div>
