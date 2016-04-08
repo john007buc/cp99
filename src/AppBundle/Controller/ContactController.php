@@ -134,6 +134,11 @@ class ContactController extends Controller{
 
     }
 
+    public function testAction()
+    {
+        
+    }
+
 
 
 }
